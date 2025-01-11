@@ -23,7 +23,6 @@ public class ClienteMapper {
                 cliente.getCuit(),
                 cliente.getEmail(),
                 cliente.getDireccion(),
-                cliente.getCoordenada(),
                 cliente.getNombre()
         );
     }
@@ -44,7 +43,6 @@ public class ClienteMapper {
         cliente.setCuit(clienteDTO.getCuit());
         cliente.setEmail(clienteDTO.getEmail());
         cliente.setDireccion(clienteDTO.getDireccion());
-        cliente.setCoordenada(clienteDTO.getCoordenada());
         cliente.setNombre(clienteDTO.getNombre());
         return cliente;
     }

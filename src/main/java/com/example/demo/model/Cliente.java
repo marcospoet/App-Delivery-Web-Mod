@@ -1,6 +1,5 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,16 +22,13 @@ public class Cliente {
     private String cuit;
     private String email;
     private String direccion;
-    @Embedded // indica que es un atributo embebido
-    private Coordenada coordenada;
     private String nombre;
 
-    public Cliente(int id, String cuit, String email, String direccion, Coordenada coordenada, String nombre) {
+    public Cliente(int id, String cuit, String email, String direccion, String nombre) {
         this.id = id;
         this.cuit = cuit;
         this.email = email;
         this.direccion = direccion;
-        this.coordenada = coordenada;
         this.nombre = nombre;
     }
 }

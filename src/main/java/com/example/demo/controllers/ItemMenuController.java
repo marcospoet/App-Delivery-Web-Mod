@@ -69,5 +69,19 @@ public class ItemMenuController {
         ItemMenuDTO itemMenuDTO = itemMenuMapper.convertirADTO(itemMenu);
         return ResponseEntity.ok(itemMenuDTO);
     }
+
+    @GetMapping("/listarItemsPorCategoria/{idCategoria}")
+    public ResponseEntity<List<ItemMenuDTO>> listarItemsPorCategoria(@PathVariable int idCategoria) {
+        List<ItemMenu> items = itemMenuService.obtenerItemsPorCategoria(idCategoria);
+        List<ItemMenuDTO> itemsDTO = items.stream()
+                .map(itemMenuMapper::convertirADTO)
+                .toList();
+
+        if (itemsDTO.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(itemsDTO);
+    }
 }
 

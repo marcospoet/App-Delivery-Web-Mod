@@ -3,32 +3,28 @@ package com.example.demo.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.demo.patrones.observer.Observable;
-import com.example.demo.patrones.observer.Observer;
-import com.example.demo.patrones.strategy.PagarMercadoPago;
-import com.example.demo.patrones.strategy.PagarTransferencia;
-import com.example.demo.patrones.strategy.PagoStrategy;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
 
-@Setter
 @Getter
-
+@Setter
 @Entity
-public class Pedido extends Observable {
+public class Pedido{
+    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Setter
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
+    @Setter
     @ManyToOne
     @JoinColumn(name = "vendedor_id")
     private Vendedor restaurante;
+    @Setter
     private double precioTotal;
-    @Getter
     @ManyToMany
     @JoinTable(
             name = "pedido_detalle",
@@ -39,10 +35,6 @@ public class Pedido extends Observable {
     private List<DetallePedido> detallesPedido;
     @Enumerated(EnumType.STRING)
     private Estado estado;
-    @Transient // indica que no se persiste en la base de datos
-    private PagoStrategy tipoDePago;
-    @Transient
-    private ArrayList<Observer> observers = new ArrayList<>();
 
     public Pedido() {
         detallesPedido = new ArrayList<>();
@@ -56,21 +48,6 @@ public class Pedido extends Observable {
         this.detallesPedido = detallesPedido;
         this.estado = estado;
     }
-    public PagoStrategy getTipoDePago() {
-        return tipoDePago;
-    }
-
-    public void setTipoDePago(PagoStrategy tipoDePago) {
-        this.tipoDePago = tipoDePago;
-    }
-
-    public void pagarMercadoPago(String alias,Double importeTotal){
-        tipoDePago = new PagarMercadoPago(alias,importeTotal);
-    }
-
-    public void pagarTransferencia(int cbu,String cuit,Double importeTotal){
-        tipoDePago = new PagarTransferencia(cbu,cuit,importeTotal);
-    }
 
     public void agregarDetalle(DetallePedido detalle){
         detallesPedido.add(detalle);
@@ -78,47 +55,6 @@ public class Pedido extends Observable {
 
     public void quitarDetalle(DetallePedido detalle){
         detallesPedido.remove(detalle);
-    }
-
-    public Vendedor getRestaurante() {
-        return restaurante;
-    }
-
-    public void setRestaurante(Vendedor restaurante) {
-        this.restaurante = restaurante;
-    }
-
-    public Estado getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-        notifyObservers();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public double getPrecioTotal() {
-        return precioTotal;
-    }
-
-    public void setPrecioTotal(double precioTotal) {
-        this.precioTotal = precioTotal;
     }
 
     public void setDetallesPedido(ArrayList<DetallePedido> detallesPedido) {
@@ -143,22 +79,5 @@ public class Pedido extends Observable {
             System.err.println("Ocurrió un error inesperado: " + e.getMessage());
         }
         return total;
-    }
-
-    @Override
-    public void addObserver(Observer observer) {
-        observers.add(observer);
-    }
-
-    @Override
-    public void removeObserver(Observer observer) {
-        observers.remove(observer);
-    }
-
-    @Override
-    public void notifyObservers() {
-        for (Observer observer : observers) {
-            observer.update(this);
-        }
     }
 }

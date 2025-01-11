@@ -122,9 +122,9 @@ public class PedidoMapper {
             }
             DetallePedido detalle = new DetallePedido();
             detalle.setCantidad(dto.getCantidad());
-            detalle.setPrecio(dto.getPrecio());
             detalle.setId(dto.getId());
             ItemMenu itemMenu = itemMenuService.obtenerItemMenu(dto.getItemMenuId());
+            detalle.setPrecio(itemMenu.getPrecio()*dto.getCantidad());
             detalle.setItem(itemMenu);
             detalle.addPedido(pedido);
             lista.add(detalle);

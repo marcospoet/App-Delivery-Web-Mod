@@ -1,9 +1,7 @@
 package com.example.demo.dto;
 
-import com.example.demo.model.Coordenada;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,9 +26,6 @@ public class ClienteDTO {
     @NotBlank(message = "La dirección no puede estar vacía")
     @Size(max = 30, message = "La dirección no puede tener más de 30 caracteres")
     private String direccion;
-
-    @NotNull(message = "La coordenada no puede ser nula")
-    private Coordenada coordenada;
 
     @NotBlank(message = "El nombre no puede estar vacío")
     @Size(max = 20, message = "El nombre no puede tener más de 20 caracteres")

@@ -21,8 +21,7 @@ public class VendedorMapper {
         return new VendedorDTO(
                 vendedor.getId(),
                 vendedor.getNombre(),
-                vendedor.getDireccion(),
-                vendedor.getCoordenada()
+                vendedor.getDireccion()
         );
     }
 
@@ -41,7 +40,6 @@ public class VendedorMapper {
         vendedor.setId(vendedorDTO.getId());
         vendedor.setNombre(vendedorDTO.getNombre());
         vendedor.setDireccion(vendedorDTO.getDireccion());
-        vendedor.setCoordenada(vendedorDTO.getCoordenada());
         return vendedor;
     }
 }

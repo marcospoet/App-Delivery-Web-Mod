@@ -16,5 +16,7 @@ public interface IitemMenuService {
 
     ItemMenu obtenerItemMenu(int id);
 
+    List<ItemMenu> obtenerItemsPorCategoria(int idCategoria);
+
     List<ItemMenu> obtenerItemsMenu();
 }

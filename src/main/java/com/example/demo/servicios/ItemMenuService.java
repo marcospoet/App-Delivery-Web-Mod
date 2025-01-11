@@ -122,4 +122,10 @@ public class ItemMenuService implements IitemMenuService {
         return itemMenuRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("El ítem con ID " + id + " no existe."));
     }
+
+    public List<ItemMenu> obtenerItemsPorCategoria(int idCategoria) {
+        Categoria categoria = categoriaRepository.findById(idCategoria)
+                .orElseThrow(() -> new ResourceNotFoundException("La categoría con ID " + idCategoria + " no existe."));
+        return itemMenuRepository.findItemMenuByCategoria(categoria);
+    }
 }

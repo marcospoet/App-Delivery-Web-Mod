@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @NoArgsConstructor
@@ -21,8 +20,6 @@ public class Vendedor {
     private int id;
     private String nombre;
     private String direccion;
-    @Embedded
-    private Coordenada coordenada;
     @Setter
     @Getter
     @OneToMany(cascade = CascadeType.ALL)
@@ -32,11 +29,10 @@ public class Vendedor {
     private List<Pedido> listaDePedidos;
 
 
-    public Vendedor(int id, String nombre, String direccion, Coordenada coordenada) {
+    public Vendedor(int id, String nombre, String direccion) {
         this.id = id;
         this.nombre = nombre;
         this.direccion = direccion;
-        this.coordenada = coordenada;
     }
 
     public ArrayList<Comida> getItemComida() {
@@ -96,28 +92,6 @@ public class Vendedor {
         }
         return null;
     }
-
-    /*public double distancia(Cliente cliente) {
-        //la idea salio de https://gist.github.com/vananth22/888ed9a22105670e7a4092bdcf0d72e4
-
-        final int R = 6371; // Radio de la Tierra en kilómetros
-
-        double lat1 = this.coordenada.getLat();
-        double lon1 = this.coordenada.getLat();
-        double lat2 = cliente.getCoordenada().getLat();
-        double lon2 = cliente.getCoordenada().getLat();
-        
-        double latDistance = Math.toRadians(lat2 - lat1);
-        double lonDistance = Math.toRadians(lon2 - lon1);
-        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
-                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
-                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        double distance = R * c; // Convertir a kilómetros
-
-        return distance;
-    }*/
-
     public void addItemMenu(ItemMenu unItemMenu){
         itemsMenu.add(unItemMenu);
     }

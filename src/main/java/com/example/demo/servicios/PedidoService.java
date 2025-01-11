@@ -1,18 +1,14 @@
 package com.example.demo.servicios;
 
-import com.example.demo.exception.ResourceAlreadyExistsException;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Estado;
 import com.example.demo.model.Pedido;
 import com.example.demo.model.DetallePedido;
-import com.example.demo.repositorio.DetallePedidoRepository;
 import com.example.demo.repositorio.PedidoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
-import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,18 +17,12 @@ import java.util.Optional;
 public class PedidoService implements IPedidoService {
 
     private final PedidoRepository pedidoRepository;
-    private final IitemMenuService itemMenuService;
     private final IDetallePedidoService detallePedidoService;
-    private final ICategoriaService categoriaService;
-    private final DetallePedidoRepository detallePedidoRepository;
 
     @Autowired
-    public PedidoService(PedidoRepository pedidoRepository, IitemMenuService itemMenuService, IDetallePedidoService detallePedidoService, ICategoriaService categoriaService, DetallePedidoRepository detallePedidoRepository) {
+    public PedidoService(PedidoRepository pedidoRepository, IDetallePedidoService detallePedidoService) {
         this.pedidoRepository = pedidoRepository;
-        this.itemMenuService = itemMenuService;
         this.detallePedidoService = detallePedidoService;
-        this.categoriaService = categoriaService;
-        this.detallePedidoRepository = detallePedidoRepository;
     }
 
 

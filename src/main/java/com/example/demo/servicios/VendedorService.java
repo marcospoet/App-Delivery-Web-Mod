@@ -1,7 +1,6 @@
 package com.example.demo.servicios;
 
 import com.example.demo.exception.ResourceAlreadyExistsException;
-import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Vendedor;
 import com.example.demo.repositorio.VendedorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
